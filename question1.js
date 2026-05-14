@@ -23,18 +23,18 @@ let index=0;
 let score=0;
 let answers=[];
 
-
+/* SCREEN SWITCH */
 function showScreen(id){
 screens.forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-
+/* SHUFFLE */
 function shuffle(arr){
 return [...arr].sort(()=>Math.random()-0.5);
 }
 
-
+/* START */
 startBtn.onclick=()=>{
 
 if(!nameInput.value.trim()){
@@ -50,7 +50,7 @@ displayName.textContent=player;
 showScreen("category-screen");
 };
 
-
+/* CATEGORY */
 categoryBtns.forEach(btn=>{
 btn.onclick=()=>{
 
@@ -60,16 +60,12 @@ questions=shuffle(
 allQuestions.filter(q=>q.category===category)
 ).slice(0,10);
 
-index=0;
-score=0;
-answers=[];
-
 showScreen("quiz-screen");
 loadQuestion();
 };
 });
 
-
+/* LOAD QUESTION */
 function loadQuestion(){
 
 feedback.textContent="";
@@ -91,7 +87,7 @@ choicesDiv.appendChild(btn);
 });
 }
 
-
+/* ANSWER */
 function answer(btn,choice,q){
 
 const buttons=choicesDiv.querySelectorAll("button");
@@ -123,7 +119,7 @@ setTimeout(()=>{
 index++;
 if(index<10) loadQuestion();
 else showResult();
-},1200);
+},1000);
 }
 
 /* RESULT */
