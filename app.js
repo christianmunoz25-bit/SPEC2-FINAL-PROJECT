@@ -1,147 +1,161 @@
-const screens = document.querySelectorAll(".screen");
+const screens=document.querySelectorAll(".screen");
 
-const startBtn = document.getElementById("start-btn");
-const nameInput = document.getElementById("player-name");
-const displayName = document.getElementById("display-name");
+const startBtn=document.getElementById("start-btn");
+const nameInput=document.getElementById("player-name");
+const nameError=document.getElementById("name-error");
+const displayName=document.getElementById("display-name");
 
-const categoryBtns = document.querySelectorAll(".category-btn");
+const categoryBtns=document.querySelectorAll(".category-btn");
 
-const questionText = document.getElementById("question-text");
-const choicesDiv = document.getElementById("choices");
-const tracker = document.getElementById("question-tracker");
-const feedback = document.getElementById("feedback");
+const questionText=document.getElementById("question-text");
+const choicesDiv=document.getElementById("choices");
+const tracker=document.getElementById("question-tracker");
+const feedback=document.getElementById("feedback");
 
-const resultName = document.getElementById("result-name");
-const scoreText = document.getElementById("score");
-const breakdown = document.getElementById("breakdown");
-const restart = document.getElementById("restart");
+const resultName=document.getElementById("result-name");
+const scoreText=document.getElementById("score");
+const breakdown=document.getElementById("breakdown");
+const restart=document.getElementById("restart");
 
-let player = "";
-let questions = [];
-let index = 0;
-let score = 0;
-let answers = [];
+let player="";
+let questions=[];
+let index=0;
+let score=0;
+let answers=[];
 
+/* SCREEN SWITCH */
 function showScreen(id){
-    screens.forEach(s => s.classList.remove("active"));
-    document.getElementById(id).classList.add("active");
+screens.forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
+/* SHUFFLE */
 function shuffle(arr){
-    return [...arr].sort(()=>Math.random()-0.5);
+return [...arr].sort(()=>Math.random()-0.5);
 }
 
-// START
-startBtn.onclick = () => {
-    if(!nameInput.value.trim()) return;
+/* START */
+startBtn.onclick=()=>{
 
-    player = nameInput.value.trim();
-    displayName.textContent = player;
+if(!nameInput.value.trim()){
+nameError.classList.remove("hidden");
+return;
+}
 
-    showScreen("category-screen");
+nameError.classList.add("hidden");
+
+player=nameInput.value.trim();
+displayName.textContent=player;
+
+showScreen("category-screen");
 };
 
-// CATEGORY
-categoryBtns.forEach(btn => {
-    btn.onclick = () => {
+/* CATEGORY */
+categoryBtns.forEach(btn=>{
+btn.onclick=()=>{
 
-        const category = btn.dataset.category;
+const category=btn.dataset.category;
 
-        questions = shuffle(
-            allQuestions.filter(q => q.category === category)
-        ).slice(0,10);
+questions=shuffle(
+allQuestions.filter(q=>q.category===category)
+).slice(0,10);
 
-        index = 0;
-        score = 0;
-        answers = [];
+index=0;
+score=0;
+answers=[];
 
-        showScreen("quiz-screen");
-        loadQuestion();
-    };
+showScreen("quiz-screen");
+loadQuestion();
+};
 });
 
-// LOAD QUESTION
+/* LOAD QUESTION */
 function loadQuestion(){
 
-    feedback.textContent = "";
-    choicesDiv.innerHTML = "";
+feedback.textContent="";
+choicesDiv.innerHTML="";
 
-    const q = questions[index];
+const q=questions[index];
 
-    tracker.textContent = `Question ${index+1}/10`;
-    questionText.textContent = q.question;
+tracker.textContent=`Question ${index+1}/10`;
+questionText.textContent=q.question;
 
-    shuffle(q.choices).forEach(choice => {
+shuffle(q.choices).forEach(choice=>{
 
-        const btn = document.createElement("button");
-        btn.textContent = choice;
+const btn=document.createElement("button");
+btn.textContent=choice;
 
-        btn.onclick = () => answer(btn, choice, q);
+btn.onclick=()=>answer(btn,choice,q);
 
-        choicesDiv.appendChild(btn);
-    });
+choicesDiv.appendChild(btn);
+});
 }
 
-// ANSWER
-function answer(btn, choice, q){
+/* ANSWER */
+function answer(btn,choice,q){
 
-    const buttons = choicesDiv.querySelectorAll("button");
-    buttons.forEach(b => b.disabled = true);
+const buttons=choicesDiv.querySelectorAll("button");
 
-    const isCorrect = choice === q.answer;
+buttons.forEach(b=>{
+b.disabled=true;
+b.style.pointerEvents="none";
+});
 
-    if(isCorrect){
-        btn.classList.add("correct");
-        feedback.textContent = "Correct!";
-        score++;
-    } else {
-        btn.classList.add("wrong");
-        feedback.textContent = "Wrong! Correct: " + q.answer;
-    }
+const isCorrect=choice===q.answer;
 
-    answers.push({
-        question: q.question,
-        user: choice,
-        correct: q.answer,
-        isCorrect: isCorrect
-    });
-
-    setTimeout(() => {
-        index++;
-        if(index < 10) loadQuestion();
-        else showResult();
-    }, 1200);
+if(isCorrect){
+btn.classList.add("correct");
+feedback.textContent="Correct!";
+score++;
+}else{
+btn.classList.add("wrong");
+feedback.textContent="Wrong! Correct: "+q.answer;
 }
 
-// RESULT (GREEN + RED FIXED)
+answers.push({
+question:q.question,
+user:choice,
+correct:q.answer,
+isCorrect:isCorrect
+});
+
+setTimeout(()=>{
+index++;
+if(index<10) loadQuestion();
+else showResult();
+},1200);
+}
+
+/* RESULT */
 function showResult(){
 
-    showScreen("result-screen");
+showScreen("result-screen");
 
-    resultName.textContent = player;
-    scoreText.textContent = `${score}/10`;
+window.scrollTo(0,0);
 
-    breakdown.innerHTML = "";
+resultName.textContent=player;
+scoreText.textContent=`${score}/10`;
 
-    answers.forEach((a, i) => {
+breakdown.innerHTML="";
 
-        const li = document.createElement("li");
-        li.classList.add("result-item");
+answers.forEach((a,i)=>{
 
-        li.innerHTML = `
-            <b>${i+1}. ${a.question}</b><br>
-            Your Answer: 
-            <span class="${a.isCorrect ? 'text-correct' : 'text-wrong'}">
-                ${a.user}
-            </span><br>
-            ${!a.isCorrect ? 
-                `Correct Answer: <span class="text-correct">${a.correct}</span>` 
-                : ""
-            }
-        `;
+const li=document.createElement("li");
+li.classList.add("result-item");
 
-        breakdown.appendChild(li);
-    });
+li.innerHTML=`
+<b>${i+1}. ${a.question}</b><br>
+Your Answer:
+<span class="${a.isCorrect?'text-correct':'text-wrong'}">
+${a.user}
+</span><br>
+${!a.isCorrect?
+`Correct Answer: <span class="text-correct">${a.correct}</span>`
+:""}
+`;
+
+breakdown.appendChild(li);
+});
 }
 
-restart.onclick = () => location.reload();
+restart.onclick=()=>location.reload();
