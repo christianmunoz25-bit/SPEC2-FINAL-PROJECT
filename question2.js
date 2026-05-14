@@ -1,5 +1,5 @@
 const allQuestions = [
-    /* SCIENCE */
+
     {category:"Science",question:"What is the Symbol of Gold?",choices:["Au","Ag","Gd","Go"],answer:"Au"},
     {category:"Science",question:"What is called the Red Planet?",choices:["Mars","Earth","Jupiter","Saturn"],answer:"Mars"},
     {category:"Science",question:"It is a Powerhouse of cell?",choices:["Nucleus","Mitochondria","Ribosome","DNA"],answer:"Mitochondria"},
@@ -10,7 +10,7 @@ const allQuestions = [
     {category:"Science",question:"What is the speed of light approx?",choices:["300k km/s","100k","500k","1M"],answer:"300k km/s"},
     {category:"Science",question:"Who formulated the theory of relativity?",choices:["Newton","Einstein","Tesla","Galileo"],answer:"Einstein"},
     {category:"Science",question:"Most abundant gas in Earth's atmosphere?",choices:["Oxygen","Nitrogen","CO2","Helium"],answer:"Nitrogen"},
-    /* HISTORY */
+   
     {category:"History",question:"In what year did WWII end?",choices:["1940","1943","1945","1950"],answer:"1945"},
     {category:"History",question:"Who was the First US President?",choices:["Lincoln","Adams","Washington","Jefferson"],answer:"Washington"},
     {category:"History",question:"When did the Titanic sink?",choices:["1905","1912","1920","1930"],answer:"1912"},
@@ -21,7 +21,7 @@ const allQuestions = [
     {category:"History",question:"Who gave the 'I Have a Dream' speech?",choices:["Mandela","King","Malcolm X","Parks"],answer:"King"},
     {category:"History",question:"Ancient Egypt writing system?",choices:["Runes","Latin","Hieroglyphics","Cuneiform"],answer:"Hieroglyphics"},
     {category:"History",question:"The Cold War was a rivalry with whom?",choices:["China","Germany","Soviet Union","Japan"],answer:"Soviet Union"},
-    /* POP CULTURE */
+    
     {category:"Pop Culture",question:"Who played Jack in Titanic?",choices:["Pitt","Cruise","DiCaprio","Depp"],answer:"DiCaprio"},
     {category:"Pop Culture",question:"Highest grossing film of all time?",choices:["Avatar","Endgame","Titanic","Star Wars"],answer:"Avatar"},
     {category:"Pop Culture",question:"Who is the King of Pop?",choices:["Prince","Jackson","Elvis","Madonna"],answer:"Jackson"},
