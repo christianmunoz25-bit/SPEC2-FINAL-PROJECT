@@ -119,7 +119,7 @@ setTimeout(()=>{
 index++;
 if(index<10) loadQuestion();
 else showResult();
-},1000);
+},1300);
 }
 
 /* RESULT */
