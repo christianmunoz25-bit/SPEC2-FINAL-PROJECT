@@ -24,7 +24,7 @@ const allQuestions = [
     
     {category:"Pop Culture",question:"Who played Jack in Titanic?",choices:["Pitt","Cruise","DiCaprio","Depp"],answer:"DiCaprio"},
     {category:"Pop Culture",question:"Highest grossing film of all time?",choices:["Avatar","Endgame","Titanic","Star Wars"],answer:"Avatar"},
-    {category:"Pop Culture",question:"Who is the King of Pop?",choices:["Prince","Jackson","Elvis","Madonna"],answer:"Jackson"},
+    {category:"Pop Culture",question:"Who is the King of Pop?",choices:["Prince","Micheal Jackson","Elvis","Madonna"],answer:"Micheal Jackson"},
     {category:"Pop Culture",question:"What is Harry Potter's house?",choices:["Gryffindor","Slytherin","Ravenclaw","Hufflepuff"],answer:"Gryffindor"},
     {category:"Pop Culture",question:"What is the land in Game of Thrones?",choices:["Narnia","Westeros","Hogwarts","Middle Earth"],answer:"Westeros"},
     {category:"Pop Culture",question:"First American Idol winner?",choices:["Clarkson","Underwood","Hudson","Lambert"],answer:"Clarkson"},
